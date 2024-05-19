@@ -1,8 +1,7 @@
-# AY-peli
-tasohyppelypeli
+# Pääsetkö Turja Lehtosten ohi työpaikallesi satamaan?
+Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
 
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
