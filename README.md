@@ -10,7 +10,7 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
         canvas {
             display: block;
             margin: 0 auto;
-            background: url('cloudy-sky.png') no-repeat center center / cover;
+            background-color: #87CEEB;
         }
     </style>
 </head>
@@ -26,10 +26,10 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
         const OBSTACLE_WIDTH = 50;
         const OBSTACLE_HEIGHT = 50;
         const OBSTACLE_SPEED = 5;
-        const GOAL_WIDTH = 100;
-        const GOAL_HEIGHT = 100;
+        const GOAL_WIDTH = 100;  // Maalin leveys
+        const GOAL_HEIGHT = 100;  // Maalin korkeus
         const FONT_SIZE = 36;
-        const GAME_DURATION = 60;
+        const GAME_DURATION = 60;  // Pelin kesto sekunneissa
 
         const playerImg = new Image();
         playerImg.src = 'player.png';
@@ -37,6 +37,8 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
         obstacleImg.src = 'obstacle.png';
         const goalImg = new Image();
         goalImg.src = 'goal.png';
+        const backgroundImg = new Image();
+        backgroundImg.src = 'background.png';
 
         class Player {
             constructor() {
@@ -156,6 +158,9 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
             if (gameEnded) return;
 
             ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            
+            // Piirrä tausta
+            ctx.drawImage(backgroundImg, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
             player.update();
             player.draw();
@@ -197,3 +202,4 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
     </script>
 </body>
 </html>
+
