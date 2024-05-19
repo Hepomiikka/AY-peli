@@ -1,7 +1,6 @@
 # Pääsetkö Turja Lehtosten ohi työpaikallesi satamaan?
 Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
 
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +10,7 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
         canvas {
             display: block;
             margin: 0 auto;
-            background-color: #87CEEB;
+            background: url('cloudy-sky.png') no-repeat center center / cover;
         }
     </style>
 </head>
@@ -27,10 +26,10 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
         const OBSTACLE_WIDTH = 50;
         const OBSTACLE_HEIGHT = 50;
         const OBSTACLE_SPEED = 5;
-        const GOAL_WIDTH = 100;  // Maalin leveys
-        const GOAL_HEIGHT = 100;  // Maalin korkeus
+        const GOAL_WIDTH = 100;
+        const GOAL_HEIGHT = 100;
         const FONT_SIZE = 36;
-        const GAME_DURATION = 60;  // Pelin kesto sekunneissa
+        const GAME_DURATION = 60;
 
         const playerImg = new Image();
         playerImg.src = 'player.png';
@@ -47,6 +46,7 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
                 this.y = SCREEN_HEIGHT / 2 - this.height / 2;
                 this.dy = 5;
                 this.image = playerImg;
+                this.moving = false;
             }
 
             draw() {
@@ -54,11 +54,13 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
             }
 
             update() {
-                if (keys['ArrowUp'] && this.y > 0) {
-                    this.y -= this.dy;
-                }
-                if (keys['ArrowDown'] && this.y < SCREEN_HEIGHT - this.height) {
-                    this.y += this.dy;
+                if (this.moving) {
+                    if (keys['ArrowUp'] && this.y > 0) {
+                        this.y -= this.dy;
+                    }
+                    if (keys['ArrowDown'] && this.y < SCREEN_HEIGHT - this.height) {
+                        this.y += this.dy;
+                    }
                 }
             }
 
@@ -129,6 +131,7 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
 
         // Kosketustapahtumien käsittely
         canvas.addEventListener('touchstart', function (e) {
+            player.moving = true;
             let touch = e.touches[0];
             player.moveTo(touch.clientY);
         });
@@ -136,6 +139,10 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
         canvas.addEventListener('touchmove', function (e) {
             let touch = e.touches[0];
             player.moveTo(touch.clientY);
+        });
+
+        canvas.addEventListener('touchend', function (e) {
+            player.moving = false;
         });
 
         function collisionDetection(player, obstacle) {
