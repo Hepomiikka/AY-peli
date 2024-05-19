@@ -5,7 +5,7 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pääseekö ahtaaja Turja Lehtosten ohi?</title>
+    <title>Pääseetkö Turja Lehtosten ohi?</title>
     <style>
         canvas {
             display: block;
@@ -193,7 +193,7 @@ Pelin voittaa kun onnistuu 60 sekunttia väistellä Turja Lehtosia
 
             ctx.fillStyle = 'black';
             ctx.font = `${FONT_SIZE}px Arial`;
-            ctx.fillText('Pääseekö ahtaaja Turja Lehtosten ohi?', 50, 50);
+            ctx.fillText('Pääsetkö Turja Lehtosten ohi?', 50, 50);
 
             requestAnimationFrame(gameLoop);
         }
