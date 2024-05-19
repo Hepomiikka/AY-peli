@@ -1,12 +1,13 @@
 # AY-peli
 tasohyppelypeli
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pääseekö ahtaaja Turja Lehtosten ohi?</title>
+    <title>Pääseekö ahtaaja Turja Lehtosten ohi työpaikalleen</title>
     <style>
         canvas {
             display: block;
@@ -60,6 +61,12 @@ tasohyppelypeli
                 if (keys['ArrowDown'] && this.y < SCREEN_HEIGHT - this.height) {
                     this.y += this.dy;
                 }
+            }
+
+            moveTo(y) {
+                this.y = y - this.height / 2;
+                if (this.y < 0) this.y = 0;
+                if (this.y > SCREEN_HEIGHT - this.height) this.y = SCREEN_HEIGHT - this.height;
             }
         }
 
@@ -121,6 +128,17 @@ tasohyppelypeli
             keys[e.key] = false;
         });
 
+        // Kosketustapahtumien käsittely
+        canvas.addEventListener('touchstart', function (e) {
+            let touch = e.touches[0];
+            player.moveTo(touch.clientY);
+        });
+
+        canvas.addEventListener('touchmove', function (e) {
+            let touch = e.touches[0];
+            player.moveTo(touch.clientY);
+        });
+
         function collisionDetection(player, obstacle) {
             return player.x < obstacle.x + obstacle.width &&
                    player.x + player.width > obstacle.x &&
@@ -164,7 +182,7 @@ tasohyppelypeli
 
             ctx.fillStyle = 'black';
             ctx.font = `${FONT_SIZE}px Arial`;
-            ctx.fillText('Pääseekö ahtaaja Turja Lehtosten ohi?', 50, 50);
+            ctx.fillText('Pääseekö ahtaaja Turja Lehtosten ohi työpaikalleen?', 50, 50);
 
             requestAnimationFrame(gameLoop);
         }
